@@ -1,6 +1,7 @@
 const { INTEGER, STRING, DATE, Sequelize } = require("sequelize");
 
 const sequelize = require("../db");
+const SalonFacilities = require('../models/SalonFacilities');
 
 const Salon = sequelize.define("salons", {
     id: {
@@ -68,5 +69,11 @@ const Salon = sequelize.define("salons", {
     tableName: 'salons',
     timestamps: false
 });
+
+Salon.hasMany(SalonFacilities, { foreignKey: 'salon_id' });
+
+// Salon.associate = (models) => {
+//     Salon.hasMany(models.SalonFacilities);
+// };
 
 module.exports = Salon;

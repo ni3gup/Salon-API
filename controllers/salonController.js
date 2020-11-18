@@ -1,11 +1,13 @@
 const Salon = require('../models/Salon');
+const SalonFacilities = require('../models/SalonFacilities');
 
 const getSalons = async (req, res, next) => {
     try {
         const salons = await Salon.findAll({
             where: {
                 is_active: 1
-            }
+            },
+            include: SalonFacilities
         })
     
         res.json({ salons });

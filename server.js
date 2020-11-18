@@ -3,6 +3,7 @@ require('dotenv').config();
 
 const db = require('./db');
 const salonRoutes = require('./routes/salon');
+const customerAuthRoutes = require('./routes/customer/auth');
 
 const app = express();
 
@@ -18,6 +19,7 @@ const init = async () => {
 
 // Routes
 app.use('/salons', salonRoutes);
+app.use('/customers/auth', customerAuthRoutes);
 
 init();
 
