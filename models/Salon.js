@@ -72,8 +72,4 @@ const Salon = sequelize.define("salons", {
 
 Salon.hasMany(SalonFacilities, { foreignKey: 'salon_id' });
 
-// Salon.associate = (models) => {
-//     Salon.hasMany(models.SalonFacilities);
-// };
-
 module.exports = Salon;
