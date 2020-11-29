@@ -2,8 +2,9 @@ const { INTEGER, STRING, DATE, Sequelize, DECIMAL } = require("sequelize");
 
 const sequelize = require("../db");
 const Salon = require('../models/Salon');
+const Gender = require('../models/Gender');
 
-const SalonFacilities = sequelize.define("salon_facilities", {
+const SalonSpecialization = sequelize.define("salon_specializations", {
     id: {
         type: INTEGER,
         autoincrement: true,
@@ -15,13 +16,14 @@ const SalonFacilities = sequelize.define("salon_facilities", {
         allowNull: false,
         references: Salon
     },
-    name: {
-        type: STRING,
-        allowNull: false
+    salon_id: {
+        type: INTEGER,
+        allowNull: false,
+        references: Salon
     },
-    price: {
-        type: DECIMAL,
-        allowNull: false
+    is_active: {
+        type: INTEGER,
+        defaultValue: 1
     },
     created_at: {
         type: DATE,
@@ -32,10 +34,16 @@ const SalonFacilities = sequelize.define("salon_facilities", {
         type: DATE,
         allowNull: false,
         defaultValue: Sequelize.fn('now'),
-    }
+    },
+    deleted_at: {
+        type: DATE,
+        allowNull: true
+    },
 }, {
-    tableName: 'salon_facilities',
+    tableName: 'salon_specializations',
     timestamps: false
 });
 
-module.exports = SalonFacilities;
+SalonSpecialization.belongsTo(Gender, { foreignKey: 'gender_id' });
+
+module.exports = SalonSpecialization;

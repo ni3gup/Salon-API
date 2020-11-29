@@ -1,7 +1,9 @@
 const { INTEGER, STRING, DATE, Sequelize } = require("sequelize");
 
 const sequelize = require("../db");
-const SalonFacilities = require('../models/SalonFacilities');
+const SalonFacility = require('./SalonFacility');
+const SalonSpecialization = require('../models/SalonSpecialization');
+const SalonImage = require('../models/SalonImage');
 
 const Salon = sequelize.define("salons", {
     id: {
@@ -16,6 +18,11 @@ const Salon = sequelize.define("salons", {
     },
     description: {
         type: STRING,
+        allowNull: false
+    },
+    email: {
+        type: STRING,
+        unique: true,
         allowNull: false
     },
     mobile: {
@@ -62,14 +69,19 @@ const Salon = sequelize.define("salons", {
     },
     updated_at: {
         type: DATE,
-        allowNull: false,
-        defaultValue: Sequelize.fn('now'),
-    }
+        allowNull: true
+    },
+    deleted_at: {
+        type: DATE,
+        allowNull: true
+    },
 }, {
     tableName: 'salons',
     timestamps: false
 });
 
-Salon.hasMany(SalonFacilities, { foreignKey: 'salon_id' });
+Salon.hasMany(SalonFacility, { foreignKey: 'salon_id' });
+Salon.hasMany(SalonSpecialization, { foreignKey: 'salon_id' });
+Salon.hasMany(SalonImage, { foreignKey: 'salon_id' });
 
 module.exports = Salon;

@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 const db = require('./db');
-const salonRoutes = require('./routes/salon');
+const salonRoutes = require('./routes/customer/salon');
 const customerAuthRoutes = require('./routes/customer/auth');
 const customerRoutes = require('./routes/customer/customer');
 const errorMiddleware = require("./middlewares/errorMiddleware");
@@ -16,7 +16,7 @@ app.use(bodyParser.json());
 const PORT = process.env.PORT;
 
 // Routes
-app.use('/salons', salonRoutes);
+app.use('/customer/salons', salonRoutes);
 app.use('/customer', customerRoutes);
 app.use('/customer/auth', customerAuthRoutes);
 

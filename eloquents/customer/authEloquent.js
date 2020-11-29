@@ -62,4 +62,36 @@ const loginMessages = () => {
   };
 }
 
-module.exports = { signupRules, signupMessages, loginRules, loginMessages };
+const sendResetPasswordEmailRules = () => {
+  return {
+    email: "required|email"
+  };
+}
+
+const sendResetPasswordEmailMessages = () => {
+  return {
+    "email.required": "Email is required",
+    "email.email": "Email is invalid"
+  };
+}
+
+const resetPasswordRules = () => {
+  return {
+    password: "required|minLength:6|same:confirm_password",
+    confirm_password: "required|minLength:6",
+    token: "required"
+  }
+}
+
+const resetPasswordMessages = () => {
+  return {
+    "password": "Password is required",
+    "password.minLength": "Password must be atleast 6 characters",
+    "password.same": "Password must be same as confirm password",
+    "confirm_password": "Confirm Password is required",
+    "confirm_password.minLength": "Confirm Password must be atleast 6 characters",
+    "token.required": "Token is required"
+  }
+}
+
+module.exports = { signupRules, signupMessages, loginRules, loginMessages, sendResetPasswordEmailRules, sendResetPasswordEmailMessages, resetPasswordRules, resetPasswordMessages };
