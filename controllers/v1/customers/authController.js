@@ -7,10 +7,10 @@ const { randomBytes } = require('crypto');
 
 require('dotenv').config();
 
-const Customer = require('../../models/Customer');
-const { signupRules, signupMessages, loginRules, loginMessages, sendResetPasswordEmailRules, sendResetPasswordEmailMessages, resetPasswordRules, resetPasswordMessages } = require('../../eloquents/customer/authEloquent');
-const errorHandler = require('../../helpers/errorHandler');
-const sendEmail = require('../../helpers/email');
+const Customer = require('../../../models/Customer');
+const { signupRules, signupMessages, loginRules, loginMessages, sendResetPasswordEmailRules, sendResetPasswordEmailMessages, resetPasswordRules, resetPasswordMessages } = require('../../../eloquents/customer/authEloquent');
+const errorHandler = require('../../../helpers/errorHandler');
+const sendEmail = require('../../../helpers/email');
 
 /**
  * Customer Signup
@@ -306,7 +306,7 @@ const resetPassword = async (req, res) => {
             return res.send(Buffer.from('<h2 style="color: red">Reset Password Expired</h2>'));
         }
 
-        res.sendFile(join(__dirname, '../../views/reset-password.html'));
+        res.sendFile(join(__dirname, '../../../views/reset-password.html'));
     } catch (error) {
         res.set('Content-Type', 'text/html');
         res.send(Buffer.from('<h2>Oops! Something went wrong</h2>'));

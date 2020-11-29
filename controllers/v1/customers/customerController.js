@@ -1,4 +1,4 @@
-const Gender = require('../../models/Gender');
+const Gender = require('../../../models/Gender');
 
 const getGenders = async (req, res, next) => {
     try {
@@ -9,7 +9,7 @@ const getGenders = async (req, res, next) => {
             }
         });
 
-        res.json({ genders });
+        res.json(genders);
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;

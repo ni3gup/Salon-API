@@ -1,13 +1,13 @@
 const { Validator } = require("node-input-validator");
 
-const Salon = require('../../models/Salon');
-const SalonSpecialization = require("../../models/SalonSpecialization");
-const Gender = require("../../models/Gender");
-const SalonImage = require("../../models/SalonImage");
-const SalonFacility = require("../../models/SalonFacility");
-const salonEloquent = require('../../eloquents/customer/salonEloquent');
-const errorHandler = require('../../helpers/errorHandler');
-const { distance } = require('../../helpers/common');
+const Salon = require('../../../models/Salon');
+const SalonSpecialization = require("../../../models/SalonSpecialization");
+const Gender = require("../../../models/Gender");
+const SalonImage = require("../../../models/SalonImage");
+const SalonFacility = require("../../../models/SalonFacility");
+const salonEloquent = require('../../../eloquents/customer/salonEloquent');
+const errorHandler = require('../../../helpers/errorHandler');
+const { distance } = require('../../../helpers/common');
 
 require('dotenv').config;
 
@@ -34,6 +34,8 @@ const getSalons = async (req, res, next) => {
         if (customer) {
             whereCondition = { ...whereCondition, gender_id: customer.gender_id };
         }
+
+        console.log(whereCondition);
 
         let salons = await Salon.findAll({
             where: {
@@ -67,7 +69,7 @@ const getSalons = async (req, res, next) => {
 
         salons.sort((a, b) => a.distance_difference - b.distance_difference);
 
-        res.json({ salons });
+        res.json(salons);
     } catch (err) {
         if (!err.statusCode) {
             err.statusCode = 500;
